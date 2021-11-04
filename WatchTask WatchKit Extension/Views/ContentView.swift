@@ -30,10 +30,13 @@ struct ContentView: View {
               Image(systemName: "heart.fill")
                 .resizable()
                 .foregroundColor(.accentRed)
+                .frame(width: 20, height: 20)
                 .scaleEffect(animationAmount)
                 .animation(.easeInOut.repeatForever(autoreverses: true),
                            value: animationAmount)
-                .frame(width: 20, height: 20)
+                .onAppear {
+                  animationAmount = 1.3
+                }
             }
             HStack(alignment: .bottom, spacing: 0) {
               Text("\(value.1)")
@@ -50,8 +53,6 @@ struct ContentView: View {
             .foregroundColor(.white.opacity(0.5))
         }
       }
-    }.onAppear {
-      animationAmount = 2
     }
     .navigationTitle {
       Text("Heart Rate")

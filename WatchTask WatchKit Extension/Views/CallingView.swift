@@ -13,6 +13,7 @@ extension Color {
 
 struct CallingView: View {
   @State var isActive: Bool = false
+  @State var animationAmount: CGFloat = 0
   
   var body: some View {
     VStack {
@@ -35,6 +36,9 @@ struct CallingView: View {
           .frame(width: 50, height: 50)
           .background(Color.accentRed)
           .clipShape(Circle())
+          .rotationEffect(Angle(degrees: animationAmount - 15))
+          .animation(.easeInOut.repeatForever().speed(2.5),
+                     value: animationAmount)
           .onTapGesture {
             isActive.toggle()
           }
@@ -45,10 +49,16 @@ struct CallingView: View {
           .frame(width: 50, height: 50)
           .background(Color.accentGreen)
           .clipShape(Circle())
+          .rotationEffect(Angle(degrees: animationAmount))
+          .animation(.easeInOut.repeatForever().speed(2),
+                     value: animationAmount)
           .onTapGesture {
             isActive.toggle()
           }
       }.padding(.top, 11)
+        .onAppear {
+          animationAmount = 30
+        }
     }.padding(.horizontal, 20)
       .navigationBarHidden(true)
       .background(

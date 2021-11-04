@@ -20,13 +20,13 @@ extension Color {
 struct TopicsView: View {
   var images = ["camera", "heart", "video", "menucard", "globe.europe.africa", "snowflake", "person"]
   let gridItems = Array(repeating: GridItem(.fixed(37), spacing: 12, alignment: .center),
-                        count: 3)
+                        count: 5)
   @State var isActive: Bool = false
   
   var body: some View {
     ScrollView([.horizontal, .vertical], showsIndicators: false) {
       LazyVGrid(columns: gridItems, alignment: .center, spacing: 6) {
-        ForEach(0..<7) { value in
+        ForEach(0..<30) { value in
           Image(systemName: images[value % images.count])
             .foregroundColor(.white)
             .frame(width: 24, height: 24)
