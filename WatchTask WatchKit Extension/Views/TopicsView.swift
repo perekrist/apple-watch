@@ -18,15 +18,16 @@ extension Color {
 }
 
 struct TopicsView: View {
+  static let rows = 3
   var images = ["camera", "heart", "video", "menucard", "globe.europe.africa", "snowflake", "person"]
   let gridItems = Array(repeating: GridItem(.fixed(37), spacing: 12, alignment: .center),
-                        count: 5)
+                        count: rows)
   @State var isActive: Bool = false
   
   var body: some View {
     ScrollView([.horizontal, .vertical], showsIndicators: false) {
       LazyVGrid(columns: gridItems, alignment: .center, spacing: 6) {
-        ForEach(0..<30) { value in
+        ForEach(0..<8) { value in
           Image(systemName: images[value % images.count])
             .foregroundColor(.white)
             .frame(width: 24, height: 24)
@@ -35,6 +36,7 @@ struct TopicsView: View {
                                        startRadius: 0, endRadius: 20))
             .clipShape(Circle())
             .offset(x: offsetX(value), y: 0)
+            .opacity(value % (TopicsView.rows * 2) == 2 ? 0 : 1)
             .onTapGesture {
               isActive.toggle()
             }
